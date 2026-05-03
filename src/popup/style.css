@@ -1,0 +1,25 @@
+:root {
+    font-family: Arial, sans-serif;
+    padding: 16px;
+    width: 240px;
+    background-color: #FDFBD4;
+
+    /* These calculations are based on the British Dyslexia Association 2023 Style Guide */
+    --font-size: 16px;
+
+    --avg-letter-width: calc(var(--font-size) * 0.505);
+
+    --letter-spacing: calc(var(--avg-letter-width) * 0.35);
+    --word-spacing: calc(var(--letter-spacing) * 3.5);
+    --line-height: 1.5;
+
+    font-size: var(--font-size);
+    letter-spacing: var(--letter-spacing);
+    word-spacing: var(--word-spacing);
+    line-height: var(--line-height);
+}
+
+.h3 {
+    font-size: calc(var(--font-size) * 1.2);
+    margin-top: 0;
+}

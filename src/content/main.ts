@@ -1,30 +1,39 @@
+import { loadOptions } from "@/apis/google-storage"
+import { buildStyleString } from "@/helpers/style-builder"
+import { styleDictionary } from "@/helpers/style-dictionary"
+
 let styleElement: HTMLStyleElement | null = null
 
-function applyFont(fontFamily: string, fontSize: string) {
+async function enableOptions() {
   if (!styleElement) {
     styleElement = document.createElement('style')
-    styleElement.id = '__font-modifier-ext__'
+    styleElement.id = '__dyslexia-extension__'
     document.head.appendChild(styleElement)
   }
 
+  const userOptions = await loadOptions()
+
+  const styleString = buildStyleString(styleDictionary, {
+    fontFamily: userOptions.fontFamily
+  })
+
   styleElement.textContent = `
     body * {
-      font-family: ${fontFamily} !important;
-      font-size: ${fontSize} !important;
+      ${styleString}
     }
   `
 }
 
-function resetFont() {
+function disableOptions() {
   styleElement?.remove()
   styleElement = null
 }
 
 chrome.runtime.onMessage.addListener((message) => {
-  if (message.type === 'APPLY_FONT') {
-    applyFont(message.fontFamily, message.fontSize)
+  if (message.type === 'ENABLE_OPTIONS') {
+    enableOptions()
   }
-  if (message.type === 'RESET_FONT') {
-    resetFont()
+  if (message.type === 'DISABLE_OPTIONS') {
+    disableOptions()
   }
 })
