@@ -27,7 +27,7 @@ export function setupFontSelector(element: HTMLSelectElement) {
     fontArray.forEach(f => {
         const option = document.createElement('option')
         option.value = f
-        option.textContent = f.split(',')[0].replace(/'/g, '')
+        option.textContent = f.split(',')[0].replace(/['"]/g, '')
         element.appendChild(option)
     })
 
@@ -53,7 +53,11 @@ export function setupOnOffSwitch(element: HTMLInputElement) {
         element.checked = userOptions.onOffSwitch
 
         if (element.checked) {
-            await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
+            try {
+                await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
+            } catch (e) {
+                return
+            }
         } else {
             await disableOptions()
         }
@@ -64,8 +68,12 @@ export function setupOnOffSwitch(element: HTMLInputElement) {
             await saveOptions({
                 onOffSwitch: true
             })
-
-            await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
+            
+            try {
+                await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
+            } catch (e) {
+                return
+            }
         } else {
             await saveOptions({
                 onOffSwitch: false
