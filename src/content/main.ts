@@ -37,3 +37,13 @@ chrome.runtime.onMessage.addListener((message) => {
     disableOptions()
   }
 })
+
+async function init() {
+  const userOptions = await loadOptions()
+
+  if (userOptions.onOffSwitch) {
+    enableOptions()
+  }
+}
+
+init()
