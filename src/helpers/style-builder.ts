@@ -4,5 +4,5 @@ export function buildStyleString<T extends Record<string, (value: any) => string
 ) {
   return (Object.entries(dict) as [keyof T, T[keyof T]][])
     .map(([key, fn]) => fn(values[key]))
-    .join(";\n") + ";"
+    .join(';\n') + ';'
 }

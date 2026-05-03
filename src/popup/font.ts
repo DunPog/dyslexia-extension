@@ -27,11 +27,11 @@ export function setupFontSelector(element: HTMLSelectElement) {
     fontArray.forEach(f => {
         const option = document.createElement('option')
         option.value = f
-        option.textContent = f.split(',')[0].replace(/"/g, '')
+        option.textContent = f.split(',')[0].replace(/'/g, '')
         element.appendChild(option)
     })
 
-    document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         const userOptions = await loadOptions()
 
         element.value = userOptions.fontFamily
@@ -47,7 +47,7 @@ export function setupFontSelector(element: HTMLSelectElement) {
 }
 
 export function setupOnOffSwitch(element: HTMLInputElement) {
-    document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         const userOptions = await loadOptions()
 
         element.checked = userOptions.onOffSwitch
