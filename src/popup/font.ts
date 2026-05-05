@@ -1,5 +1,5 @@
 import { fontArray } from "../helpers/font-array"
-import { sendToActiveTab } from "./google-message"
+import { sendToActiveTab } from "../apis/google-message"
 import { loadOptions, saveOptions } from "@/apis/google-storage"
 import { idDictionary } from "@/helpers/id-dictionary"
 

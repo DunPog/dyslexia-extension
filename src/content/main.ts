@@ -1,4 +1,5 @@
 import { loadOptions } from "@/apis/google-storage"
+import { customFontFaces } from "@/helpers/custom-font-faces"
 import { buildStyleString } from "@/helpers/style-builder"
 import { styleDictionary } from "@/helpers/style-dictionary"
 
@@ -11,6 +12,8 @@ async function enableOptions() {
     document.head.appendChild(styleElement)
   }
 
+  const fontFaceString = customFontFaces
+
   const userOptions = await loadOptions()
 
   const styleString = buildStyleString(styleDictionary, {
@@ -21,6 +24,7 @@ async function enableOptions() {
     body * {
       ${styleString}
     }
+    ${fontFaceString}
   `
 }
 
