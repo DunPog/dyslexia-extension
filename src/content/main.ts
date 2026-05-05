@@ -12,13 +12,13 @@ async function enableOptions() {
     document.head.appendChild(styleElement)
   }
 
-  const fontFaceString = customFontFaces
-
   const userOptions = await loadOptions()
 
   const styleString = buildStyleString(styleDictionary, {
     fontFamily: userOptions.fontFamily
   })
+
+  const fontFaceString = customFontFaces
 
   styleElement.textContent = `
     body * {

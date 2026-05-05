@@ -4,7 +4,7 @@ import { loadOptions, saveOptions } from "@/apis/google-storage"
 import { idDictionary } from "@/helpers/id-dictionary"
 
 async function tryEnableOptions(){
-    const onOffSwitch = (document.getElementById(idDictionary.onOffSwitch) as HTMLInputElement)
+    const onOffSwitch = (document.getElementById(idDictionary.onOffSwitchInput) as HTMLInputElement)
 
     if (onOffSwitch.checked){
         try {
@@ -46,13 +46,18 @@ export function setupFontSelector(element: HTMLSelectElement) {
     })
 }
 
-export function setupOnOffSwitch(element: HTMLInputElement) {
+export function setupOnOffSwitch(inputElement: HTMLInputElement, spanElement: HTMLSpanElement) {
+    const onOffSwitchEnabled = 'Enabled'
+    const onOffSwitchDisabled = 'Disabled'
+
     document.addEventListener('DOMContentLoaded', async () => {
         const userOptions = await loadOptions()
 
-        element.checked = userOptions.onOffSwitch
+        inputElement.checked = userOptions.onOffSwitch
 
-        if (element.checked) {
+        spanElement.textContent = inputElement.checked ? onOffSwitchEnabled : onOffSwitchDisabled
+
+        if (inputElement.checked) {
             try {
                 await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
             } catch (e) {
@@ -63,8 +68,10 @@ export function setupOnOffSwitch(element: HTMLInputElement) {
         }
     })
     
-    element.addEventListener('change', async () => {
-        if (element.checked) {
+    inputElement.addEventListener('change', async () => {
+        spanElement.textContent = inputElement.checked ? onOffSwitchEnabled : onOffSwitchDisabled
+
+        if (inputElement.checked) {
             await saveOptions({
                 onOffSwitch: true
             })
