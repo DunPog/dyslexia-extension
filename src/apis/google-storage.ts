@@ -1,4 +1,4 @@
-import { defaultUserOptions } from "@/helpers/default-user-options"
+import { defaultUserOptions } from "@/helpers/constants/default-user-options"
 import { UserOptions } from "@/types/user-options"
 
 export async function saveOptions(options: Partial<UserOptions>): Promise<void> {

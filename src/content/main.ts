@@ -1,7 +1,7 @@
 import { loadOptions } from "@/apis/google-storage"
-import { customFontFaces } from "@/helpers/custom-font-faces"
-import { buildStyleString } from "@/helpers/style-builder"
-import { styleDictionary } from "@/helpers/style-dictionary"
+import { customFontFaces } from "@/helpers/constants/custom-font-faces"
+import { buildStyleString } from "@/helpers/functions/style-builder"
+import { styleDictionary } from "@/helpers/constants/style-dictionary"
 
 let styleElement: HTMLStyleElement | null = null
 

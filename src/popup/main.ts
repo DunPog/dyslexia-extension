@@ -1,6 +1,7 @@
 import './style.css'
-import { setupFontSelector, setupOnOffSwitch } from './font'
-import { idDictionary } from '../helpers/id-dictionary'
+import { idDictionary } from '../helpers/constants/id-dictionary'
+import { setupFontSelector } from './font'
+import { setupOnOffSwitch } from './on-off'
 
 document.querySelector('#app')!.innerHTML = `
   <div>

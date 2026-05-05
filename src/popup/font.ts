@@ -1,27 +1,6 @@
-import { fontArray } from "../helpers/font-array"
-import { sendToActiveTab } from "../apis/google-message"
+import { fontArray } from "../helpers/constants/font-array"
 import { loadOptions, saveOptions } from "@/apis/google-storage"
-import { idDictionary } from "@/helpers/id-dictionary"
-
-async function tryEnableOptions(){
-    const onOffSwitch = (document.getElementById(idDictionary.onOffSwitchInput) as HTMLInputElement)
-
-    if (onOffSwitch.checked){
-        try {
-            await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
-        } catch (e) {
-            return
-        }
-    }
-}
-
-async function disableOptions(){
-    try {
-        await sendToActiveTab({ type: 'DISABLE_OPTIONS' })
-    } catch (e) {
-        return
-    }
-}
+import { tryEnableOptions } from "./on-off"
 
 export function setupFontSelector(element: HTMLSelectElement) {
     fontArray.forEach(f => {
@@ -43,50 +22,5 @@ export function setupFontSelector(element: HTMLSelectElement) {
         })
 
         await tryEnableOptions()
-    })
-}
-
-export function setupOnOffSwitch(inputElement: HTMLInputElement, spanElement: HTMLSpanElement) {
-    const onOffSwitchEnabled = 'Enabled'
-    const onOffSwitchDisabled = 'Disabled'
-
-    document.addEventListener('DOMContentLoaded', async () => {
-        const userOptions = await loadOptions()
-
-        inputElement.checked = userOptions.onOffSwitch
-
-        spanElement.textContent = inputElement.checked ? onOffSwitchEnabled : onOffSwitchDisabled
-
-        if (inputElement.checked) {
-            try {
-                await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
-            } catch (e) {
-                return
-            }
-        } else {
-            await disableOptions()
-        }
-    })
-    
-    inputElement.addEventListener('change', async () => {
-        spanElement.textContent = inputElement.checked ? onOffSwitchEnabled : onOffSwitchDisabled
-
-        if (inputElement.checked) {
-            await saveOptions({
-                onOffSwitch: true
-            })
-            
-            try {
-                await sendToActiveTab({ type: 'ENABLE_OPTIONS' })
-            } catch (e) {
-                return
-            }
-        } else {
-            await saveOptions({
-                onOffSwitch: false
-            })
-
-            await disableOptions()
-        }
     })
 }
