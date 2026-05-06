@@ -1,7 +1,8 @@
 import './style.css'
 import { idDictionary } from '../helpers/constants/id-dictionary'
-import { setupFontSizeInput, setupFontTypeSelect } from './font'
 import { setupOnOffSwitch } from './on-off'
+import { setupFontSizeInput, setupFontTypeSelect } from './font'
+import { setupInterLetterSpacingSelect, setupInterWordSpacingSelect, setupLineSpacingSelect } from './spacing'
 
 document.querySelector('#app')!.innerHTML = `
   <div>
@@ -16,9 +17,19 @@ document.querySelector('#app')!.innerHTML = `
     <br>
     <input class="input" id=${idDictionary.fontSizeInput} type="range">
     <label class="label" id=${idDictionary.fontSizeLabel} for=${idDictionary.fontSizeInput}></label>
+    <br>
+    <span class="span">Character spacing: </span>
+    <select class="input" id=${idDictionary.interLetterSpacingSelect}></select>
+    <span class="span">Word spacing: </span>
+    <select class="input" id=${idDictionary.interWordSpacingSelect}></select>
+    <span class="span">Line spacing: </span>
+    <select class="input" id=${idDictionary.lineSpacingSelect}></select>
   </div>
 `
 
 setupOnOffSwitch(document.querySelector(`#${idDictionary.onOffSwitchInput}`)!, document.querySelector(`#${idDictionary.onOffSwitchSpan}`)!)
 setupFontTypeSelect(document.querySelector(`#${idDictionary.fontTypeSelect}`)!)
 setupFontSizeInput(document.querySelector(`#${idDictionary.fontSizeInput}`)!, document.querySelector(`#${idDictionary.fontSizeLabel}`)!)
+setupInterLetterSpacingSelect(document.querySelector(`#${idDictionary.interLetterSpacingSelect}`)!)
+setupInterWordSpacingSelect(document.querySelector(`#${idDictionary.interWordSpacingSelect}`)!)
+setupLineSpacingSelect(document.querySelector(`#${idDictionary.lineSpacingSelect}`)!)

@@ -28,7 +28,6 @@ export function setupFontTypeSelect(element: HTMLSelectElement) {
 export function setupFontSizeInput(inputElement: HTMLInputElement, labelElement: HTMLLabelElement) {
     inputElement.min = '16'
     inputElement.max = '19'
-    inputElement.value = '16'
 
     labelElement.textContent = `${inputElement.value}px`
 

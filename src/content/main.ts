@@ -16,7 +16,10 @@ async function enableOptions() {
 
   const styleString = buildStyleString(styleDictionary, {
     fontFamily: userOptions.fontFamily,
-    fontSize: userOptions.fontSize
+    fontSize: userOptions.fontSize,
+    interLetterSpacing: userOptions.interLetterSpacing,
+    interWordSpacing: userOptions.interWordSpacing,
+    lineSpacing: userOptions.lineSpacing
   })
 
   const fontFaceString = customFontFaces
