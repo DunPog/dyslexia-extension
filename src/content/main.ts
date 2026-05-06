@@ -15,7 +15,8 @@ async function enableOptions() {
   const userOptions = await loadOptions()
 
   const styleString = buildStyleString(styleDictionary, {
-    fontFamily: userOptions.fontFamily
+    fontFamily: userOptions.fontFamily,
+    fontSize: userOptions.fontSize
   })
 
   const fontFaceString = customFontFaces
