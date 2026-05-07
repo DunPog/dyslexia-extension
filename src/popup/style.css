@@ -5,7 +5,7 @@
     background-color: #FDFBD4;
 
     /* These calculations are based on the British Dyslexia Association 2023 Style Guide */
-    --font-size: 16px;
+    --font-size: 19px;
 
     --avg-letter-width: calc(var(--font-size) * 0.505);
 

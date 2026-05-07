@@ -2,6 +2,7 @@ import { loadOptions } from "@/apis/google-storage"
 import { customFontFaces } from "@/helpers/constants/custom-font-faces"
 import { buildStyleString } from "@/helpers/functions/style-builder"
 import { styleDictionary } from "@/helpers/constants/style-dictionary"
+import { headerStyles } from "@/helpers/constants/header-styles"
 
 let styleElement: HTMLStyleElement | null = null
 
@@ -22,12 +23,15 @@ async function enableOptions() {
     lineSpacing: userOptions.lineSpacing
   })
 
+  const headerStyleString = headerStyles(userOptions.fontSize)
+
   const fontFaceString = customFontFaces
 
   styleElement.textContent = `
     body * {
       ${styleString}
     }
+    ${headerStyleString}
     ${fontFaceString}
   `
 }

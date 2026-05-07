@@ -12,17 +12,28 @@ document.querySelector('#app')!.innerHTML = `
     <br>
     <br>
     <span class="span">Font style: </span>
+    <br>
     <select class="select" id=${idDictionary.fontTypeSelect}></select>
+    <br>
+    <br>
     <span class="span">Font size: </span>
     <br>
     <input class="input" id=${idDictionary.fontSizeInput} type="range">
     <label class="label" id=${idDictionary.fontSizeLabel} for=${idDictionary.fontSizeInput}></label>
     <br>
+    <br>
     <span class="span">Character spacing: </span>
+    <br>
     <select class="input" id=${idDictionary.interLetterSpacingSelect}></select>
+    <br>
+    <br>
     <span class="span">Word spacing: </span>
+    <br>
     <select class="input" id=${idDictionary.interWordSpacingSelect}></select>
+    <br>
+    <br>
     <span class="span">Line spacing: </span>
+    <br>
     <select class="input" id=${idDictionary.lineSpacingSelect}></select>
   </div>
 `
