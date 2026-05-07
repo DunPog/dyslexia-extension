@@ -5,4 +5,5 @@ export type UserOptions = {
   interLetterSpacing: string,
   interWordSpacing: string,
   lineSpacing: string,
+  textColor: string,
 }

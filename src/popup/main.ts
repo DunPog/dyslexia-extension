@@ -3,6 +3,7 @@ import { idDictionary } from '../helpers/constants/id-dictionary'
 import { setupOnOffSwitch } from './on-off'
 import { setupFontSizeInput, setupFontTypeSelect } from './font'
 import { setupInterLetterSpacingSelect, setupInterWordSpacingSelect, setupLineSpacingSelect } from './spacing'
+import { setupTextColorInput } from './color'
 
 document.querySelector('#app')!.innerHTML = `
   <div>
@@ -24,17 +25,22 @@ document.querySelector('#app')!.innerHTML = `
     <br>
     <span class="span">Character spacing: </span>
     <br>
-    <select class="input" id=${idDictionary.interLetterSpacingSelect}></select>
+    <select class="select" id=${idDictionary.interLetterSpacingSelect}></select>
     <br>
     <br>
     <span class="span">Word spacing: </span>
     <br>
-    <select class="input" id=${idDictionary.interWordSpacingSelect}></select>
+    <select class="select" id=${idDictionary.interWordSpacingSelect}></select>
     <br>
     <br>
     <span class="span">Line spacing: </span>
     <br>
-    <select class="input" id=${idDictionary.lineSpacingSelect}></select>
+    <select class="select" id=${idDictionary.lineSpacingSelect}></select>
+    <br>
+    <br>
+    <span class="span">Text colour: </span>
+    <br>
+    <input class="input" id=${idDictionary.textColorInput} type="color">
   </div>
 `
 
@@ -44,3 +50,4 @@ setupFontSizeInput(document.querySelector(`#${idDictionary.fontSizeInput}`)!, do
 setupInterLetterSpacingSelect(document.querySelector(`#${idDictionary.interLetterSpacingSelect}`)!)
 setupInterWordSpacingSelect(document.querySelector(`#${idDictionary.interWordSpacingSelect}`)!)
 setupLineSpacingSelect(document.querySelector(`#${idDictionary.lineSpacingSelect}`)!)
+setupTextColorInput(document.querySelector(`#${idDictionary.textColorInput}`)!)

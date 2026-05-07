@@ -7,4 +7,5 @@ export const defaultUserOptions: UserOptions = {
     interLetterSpacing: '35',
     interWordSpacing: '35',
     lineSpacing: '1.5',
+    textColor: '#000000',
 }

@@ -4,4 +4,5 @@ export const styleDictionary = {
     interLetterSpacing: (value:string) => `letter-spacing: ${value}% !important`,
     interWordSpacing: (value:string) => `word-spacing: ${value}% !important`,
     lineSpacing: (value:string) => `line-height: ${value} !important`,
+    textColor: (value:string) => `color: ${value} !important`,
 } as const

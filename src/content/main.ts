@@ -20,7 +20,8 @@ async function enableOptions() {
     fontSize: userOptions.fontSize,
     interLetterSpacing: userOptions.interLetterSpacing,
     interWordSpacing: userOptions.interWordSpacing,
-    lineSpacing: userOptions.lineSpacing
+    lineSpacing: userOptions.lineSpacing,
+    textColor: userOptions.textColor
   })
 
   const headerStyleString = headerStyles(userOptions.fontSize)
@@ -28,7 +29,7 @@ async function enableOptions() {
   const fontFaceString = customFontFaces
 
   styleElement.textContent = `
-    body * {
+    body *:not(a, a *) {
       ${styleString}
     }
     ${headerStyleString}

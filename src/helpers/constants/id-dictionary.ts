@@ -7,4 +7,5 @@ export const idDictionary = {
     interLetterSpacingSelect: 'inter-letter-spacing-select',
     interWordSpacingSelect: 'inter-word-spacing-select',
     lineSpacingSelect: 'line-spacing-select',
+    textColorInput: 'text-color-input',
 } as const
