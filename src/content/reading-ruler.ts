@@ -8,7 +8,7 @@ export class ReadingRuler {
     private bottomShade: HTMLElement | null = null
     private notification: HTMLElement | null = null
     private isActive = false
-    private lineHeight = 40 // The height of the reading ruler band (in px)
+    private rulerBandHeight = 40 // (in px)
 
     get active() {
         return this.isActive
@@ -86,8 +86,8 @@ export class ReadingRuler {
         this.container = elementBuilder('div', {
             id: 'reading-ruler-container',
             position: 'fixed',
+            zIndex: '2147483646', // 2nd highest possible zIndex value (To prevent other page elements from interfering)
             inset: '0',
-            zIndex: '2147483646', // 2nd largest possible z-index value according to the 32-bit integer limit
             pointerEvents: 'none'
         })
 
@@ -105,7 +105,7 @@ export class ReadingRuler {
             position: 'fixed',
             left: '0',
             width: '100%',
-            height: `${this.lineHeight}px`,
+            height: `${this.rulerBandHeight}px`,
             backdropFilter: defaultBrightness,
             WebkitBackdropFilter: defaultBrightness,
             outline: '1px solid rgba(255,240,100,0.35)'
@@ -130,10 +130,10 @@ export class ReadingRuler {
         this.notification = elementBuilder('div', {
             id: 'reading-ruler-notification',
             position: 'fixed',
+            zIndex: '2147483647', // Highest possible zIndex value (To prevent other page elements from interfering)
             bottom: '24px',
             left: '50%',
             transform: 'translateX(-50%)',
-            zIndex: '2147483647',
             background: 'rgba(20,20,20,0.92)',
             color: '#fff',
             padding: '10px 20px',
@@ -153,7 +153,7 @@ export class ReadingRuler {
 
     private onMouseMove = (event: MouseEvent) => {
         const clientY = event.clientY
-        const halfLineHeight = this.lineHeight / 2
+        const halfLineHeight = this.rulerBandHeight / 2
         const top = Math.max(0, clientY - halfLineHeight)
         const bottom = Math.max(0, window.innerHeight - (clientY + halfLineHeight))
 
@@ -167,7 +167,7 @@ export class ReadingRuler {
 
         if (this.rulerBand) {
             this.rulerBand.style.top = `${top}px`
-            this.rulerBand.style.height = `${this.lineHeight}px`
+            this.rulerBand.style.height = `${this.rulerBandHeight}px`
         }
     }
 
