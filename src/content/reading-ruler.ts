@@ -80,6 +80,9 @@ export class ReadingRuler {
     }
 
     private createRulerOverlay() {
+        const lowBrightness = 'brightness(0.25)'
+        const defaultBrightness = 'brightness(1)'
+
         this.container = elementBuilder('div', {
             id: 'reading-ruler-container',
             position: 'fixed',
@@ -93,7 +96,8 @@ export class ReadingRuler {
             top: '0', 
             left: '0',
             width: '100%',
-            background: 'rgba(0,0,0,0.45)',
+            backdropFilter: lowBrightness,
+            WebkitBackdropFilter: lowBrightness,
             transition: 'height 40ms linear'
         })
 
@@ -102,18 +106,18 @@ export class ReadingRuler {
             left: '0',
             width: '100%',
             height: `${this.lineHeight}px`,
-            background: 'rgba(255,253,200,0.12)',
-            borderTop: '1px solid rgba(255,240,100,0.35)',
-            borderBottom: '1px solid rgba(255,240,100,0.35)',
-            boxSizing: 'border-box'
+            backdropFilter: defaultBrightness,
+            WebkitBackdropFilter: defaultBrightness,
+            outline: '1px solid rgba(255,240,100,0.35)'
         })
 
         this.bottomShade = elementBuilder('div', {
             position: 'fixed',
+            bottom: '0',
             left: '0',
             width: '100%',
-            bottom: '0',
-            background: 'rgba(0,0,0,0.45)',
+            backdropFilter: lowBrightness,
+            WebkitBackdropFilter: lowBrightness,
             transition: 'height 40ms linear'
         })
 
