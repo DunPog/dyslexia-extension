@@ -3,6 +3,7 @@ import { customFontFaces } from "@/helpers/constants/custom-font-faces"
 import { buildStyleString } from "@/helpers/functions/style-builder"
 import { styleDictionary } from "@/helpers/constants/style-dictionary"
 import { headerStyles } from "@/helpers/constants/header-styles"
+import { ReadingRuler } from "./reading-ruler"
 
 let styleElement: HTMLStyleElement | null = null
 
@@ -51,11 +52,25 @@ chrome.runtime.onMessage.addListener((message) => {
   }
 })
 
+const readingRuler = new ReadingRuler()
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message.type === 'TOGGLE_READING_RULER') {
+    readingRuler.toggle()
+    
+    sendResponse({ active: readingRuler.active })
+  }
+})
+
 async function init() {
   const userOptions = await loadOptions()
 
   if (userOptions.onOffSwitch) {
     enableOptions()
+  }
+
+  if (userOptions.readingRulerActive) {
+    readingRuler.activate()
   }
 }
 

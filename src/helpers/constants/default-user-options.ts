@@ -8,4 +8,5 @@ export const defaultUserOptions: UserOptions = {
     interWordSpacing: '35',
     lineSpacing: '1.5',
     textColor: '#000000',
+    readingRulerActive: false,
 }

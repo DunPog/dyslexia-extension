@@ -6,4 +6,5 @@ export type UserOptions = {
   interWordSpacing: string,
   lineSpacing: string,
   textColor: string,
+  readingRulerActive: boolean,
 }

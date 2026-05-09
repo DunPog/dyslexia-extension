@@ -8,4 +8,5 @@ export const idDictionary = {
     interWordSpacingSelect: 'inter-word-spacing-select',
     lineSpacingSelect: 'line-spacing-select',
     textColorInput: 'text-color-input',
+    readingRulerButton: 'reading-ruler-button',
 } as const

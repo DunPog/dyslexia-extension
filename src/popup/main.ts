@@ -4,6 +4,7 @@ import { setupOnOffSwitch } from './on-off'
 import { setupFontSizeInput, setupFontTypeSelect } from './font'
 import { setupInterLetterSpacingSelect, setupInterWordSpacingSelect, setupLineSpacingSelect } from './spacing'
 import { setupTextColorInput } from './color'
+import { setupReadingRulerButton } from './reading-ruler'
 
 document.querySelector('#app')!.innerHTML = `
   <div>
@@ -41,6 +42,9 @@ document.querySelector('#app')!.innerHTML = `
     <span class="span">Text colour: </span>
     <br>
     <input class="input" id=${idDictionary.textColorInput} type="color">
+    <br>
+    <br>
+    <button class="button" id=${idDictionary.readingRulerButton}></button>
   </div>
 `
 
@@ -51,3 +55,4 @@ setupInterLetterSpacingSelect(document.querySelector(`#${idDictionary.interLette
 setupInterWordSpacingSelect(document.querySelector(`#${idDictionary.interWordSpacingSelect}`)!)
 setupLineSpacingSelect(document.querySelector(`#${idDictionary.lineSpacingSelect}`)!)
 setupTextColorInput(document.querySelector(`#${idDictionary.textColorInput}`)!)
+await setupReadingRulerButton(document.querySelector(`#${idDictionary.readingRulerButton}`)!)
