@@ -92,7 +92,7 @@ chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
     }
 
     if (response.status === 429) {
-      pageSummary = 'Too many page summary requests. Please try again in a few moments.'
+      pageSummary = 'Too many page summary requests. You may have exceeded your daily allowance. (Refer to the Google Gemini API dashboard for more details)'
     }
 
     const html = await marked.parse(pageSummary)
