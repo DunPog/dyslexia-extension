@@ -2,8 +2,11 @@ import { loadOptions } from "@/apis/google-storage"
 import { customFontFaces } from "@/helpers/constants/custom-font-faces"
 import { buildStyleString } from "@/helpers/functions/style-builder"
 import { styleDictionary } from "@/helpers/constants/style-dictionary"
-import { headerStyles } from "@/helpers/constants/header-styles"
+import { headerStyles } from "@/helpers/functions/header-styles"
 import { ReadingRuler } from "./reading-ruler"
+import { articleBuilder } from "@/helpers/functions/article-builder"
+import { setupSummaryOverlay } from "./page-summary"
+import { marked } from "marked"
 
 let styleElement: HTMLStyleElement | null = null
 
@@ -18,11 +21,17 @@ async function enableOptions() {
 
   const styleString = buildStyleString(styleDictionary, {
     fontFamily: userOptions.fontFamily,
-    fontSize: userOptions.fontSize,
     interLetterSpacing: userOptions.interLetterSpacing,
     interWordSpacing: userOptions.interWordSpacing,
-    lineSpacing: userOptions.lineSpacing,
+    lineSpacing: userOptions.lineSpacing
+  })
+
+  const colorStyleString = buildStyleString(styleDictionary, {
     textColor: userOptions.textColor
+  })
+
+  const sizeStyleString = buildStyleString(styleDictionary, {
+    fontSize: userOptions.fontSize
   })
 
   const headerStyleString = headerStyles(userOptions.fontSize)
@@ -30,9 +39,18 @@ async function enableOptions() {
   const fontFaceString = customFontFaces
 
   styleElement.textContent = `
-    body *:not(a, a *) {
+    body *:not(figure, figure *) {
       ${styleString}
     }
+
+    body *:not(a, a *, figure, figure *) {
+      ${colorStyleString}
+    }
+
+    body *:not(h1, h1 *, h2, h2 *, h3, h3 *, h4, h4 *, h5, h5 *, h6, h6 *, figure, figure *) {
+      ${sizeStyleString}
+    }
+
     ${headerStyleString}
     ${fontFaceString}
   `
@@ -43,22 +61,39 @@ function disableOptions() {
   styleElement = null
 }
 
-chrome.runtime.onMessage.addListener((message) => {
+const readingRuler = new ReadingRuler()
+
+chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
   if (message.type === 'ENABLE_OPTIONS') {
     enableOptions()
   }
+
   if (message.type === 'DISABLE_OPTIONS') {
     disableOptions()
   }
-})
 
-const readingRuler = new ReadingRuler()
-
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === 'TOGGLE_READING_RULER') {
     readingRuler.toggle()
     
     sendResponse({ active: readingRuler.active })
+
+    return true
+  }
+
+  if (message.type === 'PAGE_SUMMARY') {
+    const article = articleBuilder()
+    
+    const articleText = article?.textContent || ''
+
+    const response = await chrome.runtime.sendMessage({ type: 'GENERATE_AI_SUMMARY', text: articleText })
+
+    const pageSummary = typeof response.result === 'string' ? response.result : 'Failed to generate page summary.'
+
+    const html = await marked.parse(pageSummary)
+
+    setupSummaryOverlay(html)
+
+    return true
   }
 })
 
@@ -73,5 +108,11 @@ async function init() {
     readingRuler.activate()
   }
 }
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    init()
+  }
+})
 
 init()

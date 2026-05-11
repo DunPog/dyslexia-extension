@@ -1,3 +1,4 @@
+import { sendToActiveTabAndGetResponse } from "@/apis/google-message"
 import { loadOptions, saveOptions } from "@/apis/google-storage"
 
 export async function setupReadingRulerButton(element: HTMLButtonElement) {
@@ -13,13 +14,7 @@ export async function setupReadingRulerButton(element: HTMLButtonElement) {
     updateButton()
 
     element.addEventListener('click', async () => {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow:true })
-
-        if (!tab.id) {
-            return
-        }
-
-        const response = await chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_READING_RULER' })
+        const response = await sendToActiveTabAndGetResponse({ type: 'TOGGLE_READING_RULER' })
 
         active = response?.active ?? false
 

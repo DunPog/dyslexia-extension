@@ -7,27 +7,27 @@ export function headerStyles(fontSize: string): string {
     const h1FontSize = h2FontSize * 1.2
 
     return `
-        h6 {
+        h6, h6 * {
             font-size: ${Math.round(h6FontSize)}px !important;
         }
 
-        h5 {
+        h5, h5 * {
             font-size: ${Math.round(h5FontSize)}px !important;
         }
 
-        h4 {
+        h4, h4 * {
             font-size: ${Math.round(h4FontSize)}px !important;
         }
 
-        h3 {
+        h3, h3 * {
             font-size: ${Math.round(h3FontSize)}px !important;
         }
 
-        h2 {
+        h2, h2 * {
             font-size: ${Math.round(h2FontSize)}px !important;
         }
 
-        h1 {
+        h1, h1 * {
             font-size: ${Math.round(h1FontSize)}px !important;
         }
     `

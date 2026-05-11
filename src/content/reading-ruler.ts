@@ -86,8 +86,8 @@ export class ReadingRuler {
         this.container = elementBuilder('div', {
             id: 'reading-ruler-container',
             position: 'fixed',
-            zIndex: '2147483646', // 2nd highest possible zIndex value (To prevent other page elements from interfering)
             inset: '0',
+            zIndex: '2147483646', // 2nd highest possible zIndex value (To prevent other page elements from interfering)
             pointerEvents: 'none'
         })
 
@@ -108,14 +108,16 @@ export class ReadingRuler {
             height: `${this.rulerBandHeight}px`,
             backdropFilter: defaultBrightness,
             WebkitBackdropFilter: defaultBrightness,
-            outline: '1px solid rgba(255,240,100,0.35)'
+            borderTop: '1px solid rgba(255,240,100,0.35)',
+            borderBottom: '1px solid rgba(255,240,100,0.35)',
+            boxSizing: 'border-box'
         })
 
         this.bottomShade = elementBuilder('div', {
             position: 'fixed',
-            bottom: '0',
             left: '0',
             width: '100%',
+            bottom: '0',
             backdropFilter: lowBrightness,
             WebkitBackdropFilter: lowBrightness,
             transition: 'height 40ms linear'

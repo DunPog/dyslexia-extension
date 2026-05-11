@@ -9,4 +9,8 @@ export const idDictionary = {
     lineSpacingSelect: 'line-spacing-select',
     textColorInput: 'text-color-input',
     readingRulerButton: 'reading-ruler-button',
+    pageSummaryButton: 'page-summary-button',
+    pageSummaryOverlay: 'page-summary-overlay',
+    pageSummaryOverlayButton: 'page-summary-overlay-button',
+    pageSummaryOverlayBackdrop: 'page-summary-overlay-backdrop',
 } as const

@@ -5,6 +5,7 @@ import { setupFontSizeInput, setupFontTypeSelect } from './font'
 import { setupInterLetterSpacingSelect, setupInterWordSpacingSelect, setupLineSpacingSelect } from './spacing'
 import { setupTextColorInput } from './color'
 import { setupReadingRulerButton } from './reading-ruler'
+import { setupPageSummaryButton } from './page-summary'
 
 document.querySelector('#app')!.innerHTML = `
   <div>
@@ -45,6 +46,7 @@ document.querySelector('#app')!.innerHTML = `
     <br>
     <br>
     <button class="button" id=${idDictionary.readingRulerButton}></button>
+    <button class="button" id=${idDictionary.pageSummaryButton}>Generate page summary</button>
   </div>
 `
 
@@ -56,3 +58,4 @@ setupInterWordSpacingSelect(document.querySelector(`#${idDictionary.interWordSpa
 setupLineSpacingSelect(document.querySelector(`#${idDictionary.lineSpacingSelect}`)!)
 setupTextColorInput(document.querySelector(`#${idDictionary.textColorInput}`)!)
 await setupReadingRulerButton(document.querySelector(`#${idDictionary.readingRulerButton}`)!)
+setupPageSummaryButton(document.querySelector(`#${idDictionary.pageSummaryButton}`)!)

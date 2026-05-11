@@ -22,7 +22,7 @@ export function setupTextColorInput(element: HTMLInputElement) {
                 })
 
                 await tryEnableOptions()
-            })().catch(console.error)
+            })().catch()
         }, 300)
     })
 }

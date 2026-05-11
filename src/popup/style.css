@@ -2,7 +2,8 @@
     font-family: Arial, sans-serif;
     padding: 16px;
     width: 240px;
-    background-color: #FDFBD4;
+    background-color: #FAFAC8;
+    color: #000000;
 
     /* These calculations are based on the British Dyslexia Association 2023 Style Guide */
     --font-size: 19px;
