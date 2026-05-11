@@ -4,11 +4,10 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "moduleDetection": "force",
     "useDefineForClassFields": true,
-    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["vite/client", "@crxjs/vite-plugin/client", "chrome"],
     "allowImportingTsExtensions": true,
@@ -19,8 +18,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "noUncheckedSideEffectImports": true,
-    "ignoreDeprecations": "6.0"
+    "noUncheckedSideEffectImports": true
   },
   "include": ["src"]
 }
