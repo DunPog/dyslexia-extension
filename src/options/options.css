@@ -1,12 +1,13 @@
 :root {
     font-family: Verdana, sans-serif;
-    padding: 16px;
-    width: 240px;
     background-color: #FAFAC8;
     color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     /* These calculations are based on the British Dyslexia Association 2023 Style Guide */
-    --font-size: 19px;
+    --font-size: 24px;
 
     --avg-letter-width: calc(var(--font-size) * 0.505);
 

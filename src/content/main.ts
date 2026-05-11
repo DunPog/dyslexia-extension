@@ -4,9 +4,9 @@ import { buildStyleString } from "@/helpers/functions/style-builder"
 import { styleDictionary } from "@/helpers/constants/style-dictionary"
 import { headerStyles } from "@/helpers/functions/header-styles"
 import { ReadingRuler } from "./reading-ruler"
-import { articleBuilder } from "@/helpers/functions/article-builder"
 import { setupSummaryOverlay } from "./page-summary"
 import { marked } from "marked"
+import { articleBuilder } from "@/helpers/functions/extract-page-content"
 
 let styleElement: HTMLStyleElement | null = null
 
@@ -82,12 +82,18 @@ chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
 
   if (message.type === 'PAGE_SUMMARY') {
     const article = articleBuilder()
-    
-    const articleText = article?.textContent || ''
 
-    const response = await chrome.runtime.sendMessage({ type: 'GENERATE_AI_SUMMARY', text: articleText })
+    const response = await chrome.runtime.sendMessage({ type: 'GENERATE_AI_SUMMARY', text: article })
 
-    const pageSummary = typeof response.result === 'string' ? response.result : 'Failed to generate page summary.'
+    let pageSummary = typeof response.result === 'string' ? response.result : 'Failed to generate page summary.'
+
+    if (response.status === 400 || response.status === 403) {
+      pageSummary = 'Invalid Gemini API key. Please generate a Gemini API key and save it in the extension Options'
+    }
+
+    if (response.status === 429) {
+      pageSummary = 'Too many page summary requests. Please try again in a few moments.'
+    }
 
     const html = await marked.parse(pageSummary)
 

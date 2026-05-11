@@ -1,25 +1,25 @@
 import { geminiPromptBuilder } from "@/helpers/functions/gemini-prompt-builder"
 
-const geminiApiKey = 'AIzaSyAGoqiszJrlvWuMGaxZ82QxDjhPhwB4eMc'//import.meta.env.GEMINI_API_KEY
-
 chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
     if (message.type === 'GENERATE_AI_SUMMARY') {
-        const response = await callGemini(message.text)
+        const summary = await callGemini(message.text)
 
-        sendResponse({ result: response })
+        sendResponse({ status: summary.response, result: summary.text })
+
+        return true
     }
-
-    return true
 })
 
 async function callGemini(text: string) {
+    const geminiApiKey = await chrome.storage.local.get('apiKey')
+
     const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`,
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-goog-api-key': geminiApiKey
+                'X-goog-api-key': typeof geminiApiKey.apiKey === 'string' ? geminiApiKey.apiKey : ''
             },
             body: JSON.stringify({
                 contents: [
@@ -35,7 +35,12 @@ async function callGemini(text: string) {
         }
     )
 
+    console.log(response)
+
     const json = await response.json()
 
-    return json.candidates?.[0]?.content?.parts?.[0]?.text
+    return {
+        response: response.status, 
+        text: json.candidates?.[0]?.content?.parts?.[0]?.text
+    }
 }

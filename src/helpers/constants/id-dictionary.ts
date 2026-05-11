@@ -13,4 +13,9 @@ export const idDictionary = {
     pageSummaryOverlay: 'page-summary-overlay',
     pageSummaryOverlayButton: 'page-summary-overlay-button',
     pageSummaryOverlayBackdrop: 'page-summary-overlay-backdrop',
+    optionsButton: 'options-button',
+    optionsApiKeyInput: 'options-api-key-input',
+    optionsApiKeyButton: 'options-api-key-button',
+    loadingOverlayDiv: 'loading-overlay-div',
+    loadingOverlaySpinnerDiv: 'loading-overlay-spinner-div'
 } as const

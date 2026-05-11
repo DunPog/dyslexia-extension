@@ -25,6 +25,7 @@ export default defineManifest({
   icons: {
     48: 'public/logo.png',
   },
+  options_page: 'src/options/options.html',
   permissions: [
     'contentSettings',
     'activeTab',
