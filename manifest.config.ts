@@ -19,9 +19,6 @@ export default defineManifest({
     js: ['src/content/main.ts'],
     matches: ['<all_urls>'],
   }],
-  host_permissions: [
-    "https://generativelanguage.googleapis.com/*",
-  ],
   icons: {
     48: 'public/logo.png',
   },
