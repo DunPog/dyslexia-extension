@@ -7,6 +7,7 @@ import { ReadingRuler } from "./reading-ruler"
 import { setupSummaryOverlay } from "./page-summary"
 import { marked } from "marked"
 import { articleBuilder } from "@/helpers/functions/extract-page-content"
+import { idDictionary } from "@/helpers/constants/id-dictionary"
 
 let styleElement: HTMLStyleElement | null = null
 
@@ -81,6 +82,10 @@ chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
   }
 
   if (message.type === 'PAGE_SUMMARY') {
+    if (document.getElementById(idDictionary.pageSummaryOverlay)) {
+      return
+    }
+    
     const article = articleBuilder()
 
     const response = await chrome.runtime.sendMessage({ type: 'GENERATE_AI_SUMMARY', text: article })
