@@ -17,7 +17,7 @@ export default defineManifest({
   },
   content_scripts: [{
     js: ['src/content/main.ts'],
-    matches: ['<all_urls>'],
+    matches: ['https://*/*', 'http://*/*'],
   }],
   icons: {
     48: 'public/logo.png',
