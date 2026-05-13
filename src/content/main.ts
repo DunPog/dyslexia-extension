@@ -83,7 +83,17 @@ chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
 
   if (message.type === 'PAGE_SUMMARY') {
     if (document.getElementById(idDictionary.pageSummaryOverlay)) {
-      return
+      return true
+    }
+
+    const latestUrlResponse = await chrome.storage.local.get('latestPageSummaryUrl')
+
+    if (typeof latestUrlResponse.latestPageSummaryUrl === 'string' && latestUrlResponse.latestPageSummaryUrl === window.location.href) {
+      const latestSummaryResponse = await chrome.storage.local.get('latestPageSummary')
+
+      setupSummaryOverlay(typeof latestSummaryResponse.latestPageSummary === 'string' ? latestSummaryResponse.latestPageSummary : 'Error retrieving latest page summary.')
+
+      return true
     }
     
     const article = articleBuilder()
@@ -101,6 +111,10 @@ chrome.runtime.onMessage.addListener(async (message, _sender, sendResponse) => {
     }
 
     const html = await marked.parse(pageSummary)
+
+    const currentUrl = window.location.href
+
+    await chrome.storage.local.set({ latestPageSummary: html, latestPageSummaryUrl: currentUrl })
 
     setupSummaryOverlay(html)
 
