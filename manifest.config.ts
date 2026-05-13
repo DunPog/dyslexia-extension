@@ -26,7 +26,6 @@ export default defineManifest({
   permissions: [
     'contentSettings',
     'activeTab',
-    'scripting',
     'storage',
   ],
 })
