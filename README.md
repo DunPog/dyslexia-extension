@@ -2,8 +2,12 @@
 ## Enhancing Digital Accessibility: A Text-Adaptation Browser Extension for Dyslexia
 Emre Kose s5521231 - Bournemouth University - Final Year Dissertation
 
+A browser extension that modifies typographic properties on webpages in real time, including:
+- Virtual reading ruler for line tracking
+- AI-powered page summarisation feature for large bodies of text
+
 ### Installation:
-Google Web Store TODO
+Not yet listed on the Chrome Web Store
 
 ### Local development setup:
 1. Clone repository into an IDE of choice
